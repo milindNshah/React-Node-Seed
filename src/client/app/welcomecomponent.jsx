@@ -6,11 +6,10 @@ class WelcomeComponent extends React.Component {
   render() {
     return (
       <div>
-        <h1>Welcome to Splendor</h1>
-        <h2>Subtitle here</h2>
+        <h1>This is a h1 header</h1>
+        <h2>This is a h2 header</h2>
         <img></img>
-        <Button variant="success">Create Game</Button>
-        <Button variant="success">Join Game</Button>
+        <Button variant="success">Press Me</Button>
       </div>
     );
   }
