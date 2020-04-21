@@ -1,9 +1,10 @@
-var express = require('express');
-var path = require('path');
-var bodyParser = require('body-parser');
-var opn = require('opn');
+const bodyParser = require('body-parser');
+const express = require('express');
+const opn = require('opn');
+const path = require('path');
+const socketIO = require('socket.io');
 
-var app = express();
+const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -17,11 +18,11 @@ app.use(function(req, res, next) {
     next();
 });
 
-var port = normalizePort(process.env.PORT || '1234');
+let port = normalizePort(process.env.PORT || '1234');
 app.set('port', port);
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  const port = parseInt(val, 10);
   if (isNaN(port)) {
     return val;
   }
@@ -32,6 +33,16 @@ function normalizePort(val) {
 }
 
 opn('http://localhost:'+app.get('port'));
-app.listen(app.get('port'), function () {
+const server = app.listen(app.get('port'), function () {
   console.log('Server started at: http://localhost:' + app.get('port') + '/');
 });
+const io = socketIO(server);
+
+// Add the WebSocket handlers
+io.on('connection', function(socket) {
+  "io connected";
+});
+
+setInterval(function() {
+  io.sockets.emit('message', 'hi!');
+}, 1000);
