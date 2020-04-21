@@ -6,7 +6,9 @@
   "scripts": {
     "test": "karma start",
     "build": "webpack -p",
-    "start": "webpack -d --watch & ts-node-dev --respawn server.ts"
+    "start": "webpack -d --watch & ts-node-dev --respawn server.ts",
+    "dev": "webpack -d --watch & ts-node-dev --respawn server.ts",
+    "prod": "tsc && node server.js"
   },
   "author": "",
   "license": "ISC",
